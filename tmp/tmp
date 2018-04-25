@@ -1,0 +1,18 @@
+function add(n, a){
+return new Promise((resolve, reject) => 
+{
+	var c= n+a;
+	resolve(c);
+	reject("Nie udalo sie dodac liczb");
+});
+
+}
+add(22,3).then((msg)=>{
+	console.log("Dodano: " + msg)
+},
+(err) => 
+{
+	console.log( err.message);
+}
+
+);

@@ -1,0 +1,76 @@
+const users= [{
+id:1,
+imie:'Jan',
+schoolId: 34
+},
+{
+id:2,
+imie:'Anna',
+schoolId: 29
+},{
+id:3,
+imie:'Robert',
+schoolId: 18
+}]
+const grades= [{
+id:1,
+schoolId: 34,
+grade: 4.5,
+desc: 'mat'
+},
+{
+id:2,
+schoolId: 34,
+grade: 3.5,
+desc: 'mat'
+},
+{
+id:3,
+schoolId: 29,
+grade: 5.0,
+desc: 'fiz'
+},
+{
+id:4,
+schoolId: 29,
+grade: 2.0,
+desc: 'fiz'
+}]
+
+var GetUser=function FindU(id){
+	
+	return new Promise((resolve, reject)=>{
+	var user = users.find((element)=> element.id === id);
+        var sch = user.schoolId;
+	resolve(sch);
+	reject("Nie znaleziono podanej osoby");
+});
+}
+
+var GetSchoolId = function FindS(schoolId){
+	return new Promise((resolve, reject)=>{
+	var gr = grades.filter((value)=>value.schoolId===schoolId);
+//	console.log(gr);
+	var sum=0;
+	var i=0;
+	var avg;
+	gr.forEach((gr,index)=>{
+		sum+=gr.grade;
+		i++	
+	});
+	avg = sum/i;
+	resolve(avg);
+	reject("Nie mozna obliczyc sredniej");
+	
+});
+}
+
+GetUser(1).then((msg)=>{
+	console.log("Znalezione schoolId: "+msg);
+	GetSchoolId(msg).then((msg1)=>{
+	console.log("Srednia ocen wynosi: "+ msg1)
+},(err)=>{console.log(err.message);});
+},
+(err)=>{
+	console.log(err.message);
+});

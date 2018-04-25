@@ -1,0 +1,20 @@
+const getStatus = (userID)=>{
+return 'Halo';
+};
+const getStatusA = async(userID)=>{
+return 'Halo';
+throw new Error("Error")
+};
+const getStatusAwait = async(userId)=>{
+	const user
+}
+
+
+
+getStatusA(1).then((text)=> {
+console.log(text)}
+,(err) => 
+{console.log(err);
+});
+console.log(getStatus(1))
+

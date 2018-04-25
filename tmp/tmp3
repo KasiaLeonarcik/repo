@@ -1,0 +1,25 @@
+const express = require('express');
+const hbs = require('hbs');
+const fs = require('fs');
+const PORT = process.env.PORT || 3000;
+let app = express();
+app.set('view engine','hbs');
+app.use(express.static(__dirname+'/index'));
+app.use(function (req, res, next){
+var time = new Date().getDate();
+fs.writeFileSync('./log', time+'\n',{flag:'a+'});
+next()
+})
+const t=[{title: 'Hello My node world'}]
+app.get('/', function (req,res){
+res.send({text: 'Hello My node world'});
+});
+app.get('/about', function(req, res){
+res.render('about.hbs', {nowDate:new Date().getFullYear()});
+});
+app.get('/error', function(req, res){
+res.send({text: 'Errors'});
+});
+app.listen(PORT, ()=>{
+console.log(`Example app listening on port ${PORT}!`);
+})
